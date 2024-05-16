@@ -1,22 +1,7 @@
-import { Connection, connect } from 'mongoose'
+import { createClient } from "@libsql/client";
 
-let cachedConnection: Connection | null = null
+export const db = createClient({
+  url: process.env.TURSO_DATABASE_URL as string,
+  authToken: process.env.TURSO_AUTH_TOKEN as string,
+});
 
-export async function connectToMongoDB() {
-  if (cachedConnection) {
-    console.log('Using cached MONGODB connection')
-    return cachedConnection
-  }
-  
-  try {
-    const conn = await connect(process.env.MONGODB_URI as string)
-    cachedConnection = conn.connection
-
-    console.log('New mongodb connection established')
-    return cachedConnection
-  } catch (error) {
-    console.log(error)
-
-    throw error
-  }
-}

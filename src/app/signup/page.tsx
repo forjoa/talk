@@ -1,28 +1,10 @@
-export default function Register() {
-  const handleSubmit = async (e: FormData) => {
-    'use server'
-    const data = new FormData()
+export default async function Register() {
 
-    data.append('username', e.get('username') as string)
-    data.append('fullname', e.get('fullname') as string)
-    data.append('password', e.get('password') as string)
-
-    try {
-      const result = await fetch(`${process.env.URL}/api/register`, {
-        method: 'POST',
-        body: data,
-      })
-
-      console.log(result.statusText)
-    } catch (error: any) {
-      console.error(error)
-    }
-  }
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
       <div className='rounded border-2 p-8 shadow-[5px_5px_0px_0px_rgba(255,255,255)] w-4/5 block m-auto'>
         <h2 className='text-2xl'>Create a new account</h2>
-        <form action={handleSubmit} className="h-auto">
+        <form className="h-auto">
           <label htmlFor='fullname' className='mt-8'>
             Full name
           </label>
