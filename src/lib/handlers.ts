@@ -4,5 +4,5 @@ import { register } from './lib'
 
 export const submitRegister = async (formData: FormData) => {
   await register(formData)
-  redirect('/')
+  redirect('/login')
 }
