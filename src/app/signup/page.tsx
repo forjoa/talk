@@ -1,10 +1,11 @@
-export default async function Register() {
+import { submitRegister } from '@/lib/handlers'
 
+export default async function Register() {
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
       <div className='rounded border-2 p-8 shadow-[5px_5px_0px_0px_rgba(255,255,255)] w-4/5 block m-auto'>
         <h2 className='text-2xl'>Create a new account</h2>
-        <form className="h-auto">
+        <form className='h-auto' action={submitRegister}>
           <label htmlFor='fullname' className='mt-8'>
             Full name
           </label>
