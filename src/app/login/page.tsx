@@ -1,24 +1,12 @@
-import { submitRegister } from '@/lib/handlers'
-import Link from 'next/link'
+import Link from "next/link";
 
-export default async function Register() {
+export default function Login() {
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
-      <div className='rounded border-2 p-8 shadow-[5px_5px_0px_0px_rgba(255,255,255)] w-4/5 block m-auto'>
-        <h2 className='text-2xl'>Register</h2>
-        <p className='text-gray-300 my-4'>Thank you so much since you trust us!</p>
-        <form className='h-auto' action={submitRegister}>
-          <label htmlFor='fullname' className='mt-8'>
-            Full name
-          </label>
-          <input
-            type='text'
-            name='fullname'
-            id='fullname'
-            placeholder='Fullname'
-            required
-            className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-transparent p-4 my-2'
-          />
+      <div className='rounded border-2 p-8 shadow-[5px_5px_0px_0px_rgba(255,255,255)] w-4/5 block m-auto '>
+        <h2 className='text-2xl'>Login</h2>
+        <p className='text-gray-300 my-4'>You are welcome again!</p>
+        <form className='h-auto'>
           <label htmlFor='username' className='mt-8'>
             Username
           </label>
@@ -42,13 +30,13 @@ export default async function Register() {
           />
           <input
             type='submit'
-            value='Sign up'
+            value='Sign in'
             className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-white text-black p-4 my-2 cursor-pointer'
           />
         </form>
         <div className="w-full flex flex-col items-end mt-4">
-            <p>Already have an account?</p>
-            <Link href={'/login'} className="text-blue-500 underline">Log in</Link>
+            <p>No account?</p>
+            <Link href={'/signup'} className="text-blue-500 underline">Create one</Link>
         </div>
       </div>
     </main>
