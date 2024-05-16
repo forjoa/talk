@@ -1,12 +1,21 @@
 import { submitRegister } from '@/lib/handlers'
+import { getSession } from '@/lib/lib'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export default async function Register() {
+  const session = await getSession()
+
+  if (session) {
+    redirect('/')
+  }
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
       <div className='rounded border-2 p-8 shadow-[5px_5px_0px_0px_rgba(255,255,255)] w-4/5 block m-auto'>
         <h2 className='text-2xl'>Register</h2>
-        <p className='text-gray-300 my-4'>Thank you so much since you trust us!</p>
+        <p className='text-gray-300 my-4'>
+          Thank you so much since you trust us!
+        </p>
         <form className='h-auto' action={submitRegister}>
           <label htmlFor='fullname' className='mt-8'>
             Full name
@@ -46,9 +55,11 @@ export default async function Register() {
             className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-white text-black p-4 my-2 cursor-pointer'
           />
         </form>
-        <div className="w-full flex flex-col items-end mt-4">
-            <p>Already have an account?</p>
-            <Link href={'/login'} className="text-blue-500 underline">Log in</Link>
+        <div className='w-full flex flex-col items-end mt-4'>
+          <p>Already have an account?</p>
+          <Link href={'/login'} className='text-blue-500 underline'>
+            Log in
+          </Link>
         </div>
       </div>
     </main>
