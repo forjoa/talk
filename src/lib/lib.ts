@@ -73,3 +73,14 @@ export async function logout() {
   cookies().delete('session')
   redirect('/login')
 }
+
+export async function sendMessage(formData: FormData) {
+  const conversationId = formData.get('conversationId') as string
+  const senderId = formData.get('senderId') as string
+  const content = formData.get('content') as string
+
+  await db.execute({
+    sql: 'INSERT INTO messages (conversation_id, sender_id, content) VALUES (?,?,?)',
+    args: [conversationId, senderId, content]
+  })
+}
