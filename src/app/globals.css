@@ -23,7 +23,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(2, 7, 18);
+  background: black;
   border-radius: 5px;
 }
 
@@ -38,6 +38,10 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.shadow {
+  box-shadow: 5px 5px 0px 0px rgb(255, 255, 255);
 }
 
 body {
