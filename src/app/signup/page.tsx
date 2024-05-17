@@ -7,7 +7,7 @@ export default async function Register() {
   const session = await getSession()
 
   if (session) {
-    redirect('/')
+    redirect('/chat')
   }
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
