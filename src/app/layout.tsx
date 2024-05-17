@@ -5,7 +5,7 @@ import './globals.css'
 const poppins = Poppins({ weight: ['400', '800'], subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Talk Chat',
+  title: 'Talk',
   description: 'Your Next.js favorite chat aplication',
 }
 
@@ -16,6 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        <link rel="icon" href='/chat.png' sizes='any' />
+      </head>
       <body className={poppins.className}>{children}</body>
     </html>
   )
