@@ -14,7 +14,9 @@ export default async function Chat({
 
   // get conversation messages
   const messages = await getConversation(chatId)
-  const { other_username, other_fullname } = await getOtherUser(
+
+  // get data from user that is not me 
+  const { other_fullname } = await getOtherUser(
     chatId,
     currentUserID
   )
@@ -33,7 +35,7 @@ export default async function Chat({
           <div className='font-medium'>{other_fullname as string}</div>
         </div>
       </div>
-      <div className='flex-1 flex overflow-auto p-4 flex-col justify-end'>
+      <div className='flex-1 flex overflow-auto p-4 flex-col justify-end gap-1'>
         {messages.map((message: any) => (
           <div
             key={message.message_id}
