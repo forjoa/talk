@@ -9,5 +9,5 @@ export const submitRegister = async (formData: FormData) => {
 
 export const submitLogin = async (formData: FormData) => {
   await login(formData)
-  redirect('/')
+  redirect('/chat')
 }
