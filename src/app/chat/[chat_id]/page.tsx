@@ -1,6 +1,6 @@
 import sendIcon from '@/assets/send.svg'
 import { getConversation, getOtherUser } from '@/lib/getters'
-import { getSession } from '@/lib/lib'
+import { getSession, sendMessage } from '@/lib/lib'
 import Image from 'next/image'
 
 export default async function Chat({
@@ -58,10 +58,14 @@ export default async function Chat({
         ))}
       </div>
       <div className='border-t border-gray-200 bg-gray-100 p-4 dark:border-gray-800 dark:bg-gray-950'>
-        <form className='flex items-center gap-3 rounded-lg bg-white p-2 pr-4 shadow-sm dark:bg-gray-800'>
+        <form className='flex items-center gap-3 rounded-lg bg-white p-2 pr-4 shadow-sm dark:bg-gray-800' action={sendMessage}>
+          <input type="hidden" name="conversationId" value={chatId}/>
+          <input type="hidden" name="senderId" value={currentUserID} />
           <input
             className='input flex-1 outline-none border-none bg-transparent px-4 py-2 text-sm focus:ring-0 dark:text-gray-200'
             placeholder='Type your message...'
+            autoComplete='off'
+            name='content'
           />
           <button type='submit'>
             <Image src={sendIcon} alt='Send icon' />
