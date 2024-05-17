@@ -1,7 +1,9 @@
+'use server'
 import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import { db } from './db'
 import { hash, compare } from 'bcrypt'
+import { redirect } from 'next/navigation'
 
 const secretKey = 'secret'
 const key = new TextEncoder().encode(secretKey)
@@ -69,5 +71,6 @@ export async function hashPasswords(password: string): Promise<string> {
 
 export async function logout() {
   // destroy the session
-  cookies().set('session', '', { expires: new Date(0) })
+  cookies().delete('session')
+  redirect('/login')
 }
