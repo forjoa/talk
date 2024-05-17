@@ -31,7 +31,6 @@ export async function login(formData: FormData) {
     sql: 'SELECT * FROM users WHERE username = ?',
     args: [username],
   })
-  console.log(rows)
 
   if (rows?.length !== 1) {
     return { message: 'Email is not registered' }
