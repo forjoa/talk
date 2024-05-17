@@ -74,7 +74,7 @@ export default async function ChatLayout({
             )}
           </div>
         </div>
-        <div className='hidden md:h-[calc(100%-100px)] max-h-[calc(100%-100px)] overflow-y-scroll'>
+        <div className='h-[calc(100%-100px)] max-h-[calc(100%-100px)] overflow-y-scroll'>
           {chats.length === 0 ? (
             <p className='p-4'>You don&apos;t have any chat yet</p>
           ) : (
