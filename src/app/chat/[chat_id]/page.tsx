@@ -48,7 +48,7 @@ export default async function Chat({
             }`}
           >
             <div
-              className={`p-3 rounded-lg shadow-sm ${
+              className={`p-3 rounded-lg w-auto max-w-[80%] shadow-sm ${
                 message.sender_id === currentUserID
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-300 text-black'
