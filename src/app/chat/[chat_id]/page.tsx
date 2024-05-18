@@ -21,14 +21,14 @@ export default async function Chat({
   const { other_fullname } = await getOtherUser(chatId, currentUserID)
 
   return (
-    <div className='flex h-full flex-col'>
-      <div className='flex h-[70px] md:h-[100px] items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800'>
+    <div className='flex h-full flex-col md:mx-5 md:border-x-2 md:rounded shadow'>
+      <div className='flex h-[70px] md:h-[100px] items-center justify-between border-b border-white px-4'>
         <div className='flex items-center gap-3'>
           <Link href={'/chat'} className='block md:hidden'>
             <Image src={backIcon} alt='Go back cion' />
           </Link>
           <div className='avatar'>
-            <div className='bg-gray-600 h-10 w-10 rounded-full grid place-items-center'>
+            <div className='bg-gray-600 h-10 w-10 rounded-full grid place-items-center border shadow'>
               {other_fullname?.toString().split(' ')[0].charAt(0) +
                 '' +
                 other_fullname?.toString().split(' ')[1].charAt(0)}
@@ -37,7 +37,7 @@ export default async function Chat({
           <div className='font-medium'>{other_fullname as string}</div>
         </div>
       </div>
-      <div className='flex-1 flex overflow-auto p-4 flex-col justify-end gap-1'>
+      <div className='flex-1 flex overflow-auto p-4 flex-col justify-end gap-4'>
         {messages.map((message: any) => (
           <div
             key={message.message_id}
@@ -48,10 +48,10 @@ export default async function Chat({
             }`}
           >
             <div
-              className={`p-3 rounded-lg w-auto max-w-[80%] shadow-sm ${
+              className={`p-3 rounded-lg w-auto max-w-[80%] border-2 shadow ${
                 message.sender_id === currentUserID
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-300 text-black'
+                  ? 'bg-blue-500 border-white text-white'
+                  : 'bg-white border-black text-black'
               }`}
             >
               <div className='text-sm'>{message.content}</div>
@@ -59,9 +59,9 @@ export default async function Chat({
           </div>
         ))}
       </div>
-      <div className='border-t border-gray-200 bg-gray-100 p-4 dark:border-gray-800 dark:bg-gray-950'>
+      <div className='border-t-2 border-white bg-black p-4'>
         <form
-          className='flex items-center gap-3 rounded-lg bg-white p-2 pr-4 shadow-sm dark:bg-gray-800'
+          className='flex items-center gap-3 rounded-lg bg-white bg-opacity-30 p-2 pr-4 shadow'
           action={sendMessage}
         >
           <input type='hidden' name='conversationId' value={chatId} />
