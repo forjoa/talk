@@ -22,7 +22,7 @@ export default async function Chat({
 
   return (
     <div className='flex h-full flex-col'>
-      <div className='flex h-[100px] items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800'>
+      <div className='flex h-[70px] md:h-[100px] items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800'>
         <div className='flex items-center gap-3'>
           <Link href={'/chat'} className='block md:hidden'>
             <Image src={backIcon} alt='Go back cion' />
