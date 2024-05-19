@@ -21,11 +21,11 @@ export default async function Chat({
   const { other_fullname } = await getOtherUser(chatId, currentUserID)
 
   return (
-    <div className='flex h-full flex-col md:mx-5 md:border-x-2 md:rounded shadow'>
+    <div className='flex h-full flex-col md:mx-4 md:border-2 md:rounded'>
       <div className='flex h-[70px] md:h-[100px] items-center justify-between border-b border-white px-4'>
         <div className='flex items-center gap-3'>
           <Link href={'/chat'} className='block md:hidden'>
-            <Image src={backIcon} alt='Go back cion' />
+            <Image src={backIcon} alt='Go back icon' />
           </Link>
           <div className='avatar'>
             <div className='bg-gray-600 h-10 w-10 rounded-full grid place-items-center border shadow'>
@@ -37,7 +37,7 @@ export default async function Chat({
           <div className='font-medium'>{other_fullname as string}</div>
         </div>
       </div>
-      <div className='flex-1 flex overflow-auto p-4 flex-col justify-end gap-4'>
+      <div className='flex-1 flex overflow-y-auto p-4 flex-col gap-4 snap-y'>
         {messages.map((message: any) => (
           <div
             key={message.message_id}
@@ -61,7 +61,7 @@ export default async function Chat({
       </div>
       <div className='border-t-2 border-white bg-black p-4'>
         <form
-          className='flex items-center gap-3 rounded-lg bg-white bg-opacity-30 p-2 pr-4 shadow'
+          className='flex items-center gap-3 rounded-lg border-2 bg-white bg-opacity-30 p-2 pr-4 shadow'
           action={sendMessage}
         >
           <input type='hidden' name='conversationId' value={chatId} />
