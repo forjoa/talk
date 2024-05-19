@@ -77,3 +77,19 @@ export async function getOtherUser(
 
   return rows[0]
 }
+
+export async function getAllUsers(user_id: number) {
+  try {
+    console.log('Fetching users excluding user_id:', user_id);
+    const { rows } = await db.execute({
+      sql: 'SELECT * FROM users WHERE user_id != ?',
+      args: [user_id],
+    });
+    console.log('Fetched users:', rows);
+    return rows;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
+}
+
