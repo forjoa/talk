@@ -54,8 +54,8 @@ export default function SearchUser() {
           <Image src={searchIcon} alt='Search icon' />
         </button>
       </div>
-      {filteredUsers.length !== 0 && (
-        <div className='absolute top-[98px] left-0 bg-black border-2 z-10 w-full md:w-[287px] shadow rounded-b-xl'>
+      {filteredUsers.length !== 0 && searchTerm && (
+        <div className='absolute top-[115px] left-4 bg-black border-2 z-10 w-full md:w-[282px] shadow rounded-b-xl'>
           {filteredUsers.map((user, index) => (
             <div key={index} className='p-4 border-t-2 border-white'>
               <p className='hover:underline cursor-pointer'>{user.username}</p>
