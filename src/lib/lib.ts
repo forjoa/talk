@@ -74,10 +74,8 @@ export async function logout() {
   redirect('/login')
 }
 
-export async function sendMessage(formData: FormData) {
-  const conversationId = formData.get('conversationId') as string
-  const senderId = formData.get('senderId') as string
-  const content = formData.get('content') as string
+export async function sendMessage(formData: any) {
+  const { conversationId, senderId, content } = formData
 
   await db.execute({
     sql: 'INSERT INTO messages (conversation_id, sender_id, content) VALUES (?,?,?)',
