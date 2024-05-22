@@ -36,10 +36,6 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
     }
   }, [chatId, currentUserID])
 
-  console.log('current user id:', currentUserID)
-  console.log('messages:', messages)
-  console.log('other fullname: ', otherFullname)
-
   return (
     <>
       {currentUserID && messages && otherFullname ? (
