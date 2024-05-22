@@ -74,7 +74,7 @@ export async function logout() {
   redirect('/login')
 }
 
-export async function sendMessage(formData: any) {
+export async function insertMessage(formData: any) {
   const { conversationId, senderId, content } = formData
 
   await db.execute({
