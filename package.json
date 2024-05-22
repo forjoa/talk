@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NEXT_PUBLIC_NODE_ENV=production NEXT_PUBLIC_HOSTNAME=talk-2-me.vercel.app node server.js",
     "lint": "next lint"
   },
   "dependencies": {
