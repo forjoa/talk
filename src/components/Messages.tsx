@@ -7,13 +7,13 @@ function Messages({
   messages: any[]
   currentUserID: number
 }) {
-  const messagesEndRef = useRef(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
-  }, [messages])
+  }, [messages]);
 
   return (
     <div
