@@ -1,9 +1,28 @@
-function Messages({ messages, currentUserID } : { messages : any[], currentUserID: number }) {
+import { useEffect, useRef } from 'react'
+
+function Messages({
+  messages,
+  currentUserID,
+}: {
+  messages: any[]
+  currentUserID: number
+}) {
+  const messagesEndRef = useRef(null)
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight
+    }
+  }, [messages])
+
   return (
-    <div className='flex-1 flex overflow-y-auto p-4 flex-col gap-4 snap-y'>
-      {messages?.map((message) => (
+    <div
+      className='flex-1 flex overflow-y-auto p-4 flex-col gap-4 snap-y h-full scroll-smooth'
+      ref={messagesEndRef}
+    >
+      {messages?.map((message, index) => (
         <div
-          key={message.message_id}
+          key={message.message_id ?? index}
           className={`flex ${
             message.sender_id === currentUserID
               ? 'justify-end'
@@ -22,7 +41,7 @@ function Messages({ messages, currentUserID } : { messages : any[], currentUserI
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default Messages;
+export default Messages

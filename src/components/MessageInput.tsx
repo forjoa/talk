@@ -1,9 +1,17 @@
 import React, { FormEvent, useState } from 'react'
 import Image from 'next/image'
 import sendIcon from '@/assets/send.svg'
-import { sendMessage } from '@/lib/lib'
+import { insertMessage } from '@/lib/lib'
 
-function MessageInput({ chatId, currentUserID }: { chatId: number, currentUserID: number }) {
+function MessageInput({
+  chatId,
+  currentUserID,
+  sendMessage,
+}: {
+  chatId: number
+  currentUserID: number
+  sendMessage: (message: string) => void
+}) {
   const [formData, setFormData] = useState({
     conversationId: chatId,
     senderId: currentUserID,
@@ -14,11 +22,12 @@ function MessageInput({ chatId, currentUserID }: { chatId: number, currentUserID
     event.preventDefault()
 
     if (formData.conversationId && formData.senderId && formData.content) {
-        await sendMessage(formData)
-        setFormData({
-            ...formData,
-            content: ''
-        })
+      sendMessage(formData.content)
+      await insertMessage(formData)
+      setFormData({
+        ...formData,
+        content: '',
+      })
     }
   }
 
