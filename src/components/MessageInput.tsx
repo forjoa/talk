@@ -1,14 +1,32 @@
-import React from 'react';
-import Image from 'next/image';
-import sendIcon from '@/assets/send.svg';
-import { sendMessage } from '@/lib/lib';
+import React, { FormEvent, useState } from 'react'
+import Image from 'next/image'
+import sendIcon from '@/assets/send.svg'
+import { sendMessage } from '@/lib/lib'
 
-function MessageInput({ chatId, currentUserID } : { chatId : number, currentUserID : number }) {
+function MessageInput({ chatId, currentUserID }: { chatId: number, currentUserID: number }) {
+  const [formData, setFormData] = useState({
+    conversationId: chatId,
+    senderId: currentUserID,
+    content: '',
+  })
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+
+    if (formData.conversationId && formData.senderId && formData.content) {
+        await sendMessage(formData)
+        setFormData({
+            ...formData,
+            content: ''
+        })
+    }
+  }
+
   return (
     <div className='border-t-2 border-white bg-black p-4'>
       <form
         className='flex items-center gap-3 rounded-lg border-2 bg-white bg-opacity-30 p-2 pr-4 shadow'
-        action={sendMessage}
+        onSubmit={handleSubmit}
       >
         <input type='hidden' name='conversationId' value={chatId} />
         <input type='hidden' name='senderId' value={currentUserID} />
@@ -17,13 +35,17 @@ function MessageInput({ chatId, currentUserID } : { chatId : number, currentUser
           placeholder='Type your message...'
           autoComplete='off'
           name='content'
+          value={formData.content}
+          onChange={(e) =>
+            setFormData({ ...formData, content: e.target.value })
+          }
         />
         <button type='submit'>
           <Image src={sendIcon} alt='Send icon' />
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default MessageInput;
+export default MessageInput
