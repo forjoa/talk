@@ -1,13 +1,10 @@
-import { ReactNode } from 'react'
-import searchIcon from '@/assets/search.svg'
 import logoutIcon from '@/assets/logout.svg'
 import Image from 'next/image'
 import { getSession, logout } from '@/lib/lib'
 import { redirect } from 'next/navigation'
-import { getMyChats, searchUser } from '@/lib/getters'
+import { getMyChats } from '@/lib/getters'
 import Link from 'next/link'
-
-let usersSearched: any[] = []
+import SearchUser from '@/components/SearchUser'
 
 export default async function Chat() {
   const user = await getSession()
@@ -17,13 +14,6 @@ export default async function Chat() {
   }
 
   const chats = await getMyChats(user.user_id)
-
-  const searchHandler = async (formData: FormData) => {
-    'use server'
-    const username = formData.get('username') as string
-
-    usersSearched = await searchUser(username)
-  }
 
   return (
     <>
@@ -47,32 +37,7 @@ export default async function Chat() {
                 </button>
               </form>
             </div>
-            <form
-              action={searchHandler}
-              className='flex items-center border-2 rounded border-white shadow py-2 px-4'
-            >
-              <input
-                type='text'
-                name='username'
-                id='username'
-                placeholder='Search a user'
-                className='bg-transparent outline-none flex-grow'
-              />
-              <button type='submit'>
-                <Image src={searchIcon} alt='Search icon' />
-              </button>
-            </form>
-            {usersSearched.length !== 0 && (
-              <div className='absolute top-[98px] left-0 bg-black border-2 z-10 w-[calc(100%-10px)] shadow rounded-b-xl'>
-                {usersSearched.map((user, index) => (
-                  <div key={index} className='p-4 border-t-2 border-white'>
-                    <p className='hover:underline cursor-pointer'>
-                      {user.username}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
+            <SearchUser />
           </div>
         </div>
         <div className='h-[calc(100%-100px)] max-h-[calc(100%-100px)] overflow-y-scroll'>
