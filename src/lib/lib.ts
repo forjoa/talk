@@ -33,11 +33,11 @@ export async function login(formData: FormData) {
   })
 
   if (rows?.length !== 1) {
-    return { message: 'Email is not registered' }
+    return { success: false, message: 'Username is not registered' }
   }
 
   if (!(await compare(password as string, rows[0].password as string))) {
-    return { message: 'Wrong password' }
+    return { success: false, message: 'Wrong password' }
   }
 
   // create session
@@ -45,6 +45,8 @@ export async function login(formData: FormData) {
 
   // save session in a cookie
   cookies().set('session', session)
+
+  return { success: true }
 }
 
 export async function register(formData: FormData) {
@@ -52,10 +54,19 @@ export async function register(formData: FormData) {
   const fullname = formData.get('fullname') as string
   const password = await hashPasswords(formData.get('password') as string)
 
+  const { rows } = await db.execute({
+    sql: 'SELECT * FROM users WHERE username = ?',
+    args: [username],
+  })
+
+  if (rows.length > 0) return { success: false, message: 'Username already exists' }
+
   await db.execute({
     sql: 'INSERT INTO users (username, fullname, password) VALUES (?,?,?)',
     args: [username, fullname, password],
   })
+
+  return { success: true }
 }
 
 export async function getSession() {
@@ -79,6 +90,6 @@ export async function insertMessage(formData: any) {
 
   await db.execute({
     sql: 'INSERT INTO messages (conversation_id, sender_id, content) VALUES (?,?,?)',
-    args: [conversationId, senderId, content]
+    args: [conversationId, senderId, content],
   })
 }
