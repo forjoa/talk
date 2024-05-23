@@ -41,15 +41,23 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
 
   useEffect(() => {
     if (socket) {
+      socket.emit('joinRoom', chatId.toString()) // join to the room with that id
+
       socket.on('chat message', (message: any) => {
-        setMessages((prevMessages) => [...prevMessages, { content: message.message, sender_id: message.currentUserID}])
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { content: message.message, sender_id: message.currentUserID },
+        ])
       })
     }
-  }, [socket])
+  }, [socket, chatId])
 
   const sendMessage = (message: string) => {
     if (socket) {
-      socket.emit('chat message', {message, chatId, currentUserID})
+      socket.emit('chat message', {
+        room: chatId.toString(),
+        msg: { message, currentUserID },
+      })
     }
   }
 
@@ -58,7 +66,7 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
       {currentUserID && messages && otherFullname ? (
         <div className='flex h-full flex-col md:mx-4 md:border md:border-gray-900 md:rounded'>
           <Header otherFullname={otherFullname} />
-          <Messages messages={messages} currentUserID={currentUserID}/>
+          <Messages messages={messages} currentUserID={currentUserID} />
           <MessageInput
             chatId={chatId}
             currentUserID={currentUserID}
