@@ -1,22 +1,51 @@
-import { submitRegister } from '@/lib/handlers'
-import { getSession } from '@/lib/lib'
+'use client'
+import { useState, useEffect, FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { getSession, register } from '@/lib/lib'
+import { Toaster, toast } from 'sonner'
 
-export default async function Register() {
-  const session = await getSession()
+export default function Register() {
+  const [fullname, setFullname] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
 
-  if (session) {
-    redirect('/chat')
+  // Chequear sesión al montar el componente
+  useEffect(() => {
+    async function checkSession() {
+      const session = await getSession()
+      if (session) {
+        router.push('/chat')
+      }
+    }
+    checkSession()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    const formData = new FormData()
+    formData.append('fullname', fullname)
+    formData.append('username', username)
+    formData.append('password', password)
+    const response = await register(formData)
+    if (response.success) {
+      router.push('/chat')
+    } else {
+      toast.error(response.message)
+    }
   }
+
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
+      <Toaster />
       <div className='rounded border border-gray-900 p-8 w-4/5 block m-auto'>
         <h2 className='text-2xl'>Register</h2>
         <p className='text-gray-400 my-4'>
           Thank you so much since you trust us!
         </p>
-        <form className='h-auto' action={submitRegister}>
+        <form className='h-auto' onSubmit={handleSubmit}>
           <label htmlFor='fullname' className='mt-8'>
             Full name
           </label>
@@ -26,6 +55,8 @@ export default async function Register() {
             id='fullname'
             placeholder='Fullname'
             required
+            value={fullname}
+            onChange={(e) => setFullname(e.target.value)}
             className='w-full rounded border border-gray-900 bg-transparent p-4 my-2 outline-2 outline-white'
           />
           <label htmlFor='username' className='mt-8'>
@@ -37,6 +68,8 @@ export default async function Register() {
             id='username'
             placeholder='Username'
             required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className='w-full rounded border border-gray-900 bg-transparent p-4 my-2 outline-2 outline-white'
           />
           <label htmlFor='password' className='mt-8'>
@@ -47,6 +80,8 @@ export default async function Register() {
             name='password'
             id='password'
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className='w-full rounded border border-gray-900 bg-transparent p-4 my-2 outline-2 outline-white'
           />
           <input
