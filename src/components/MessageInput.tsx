@@ -1,6 +1,4 @@
 import React, { FormEvent, useState } from 'react'
-import Image from 'next/image'
-import sendIcon from '@/assets/send.svg'
 import { insertMessage } from '@/lib/lib'
 
 function MessageInput({
@@ -31,23 +29,40 @@ function MessageInput({
     }
   }
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData({ ...formData, content: e.target.value })
+    autoResizeTextarea(e.target)
+  }
+
+  const autoResizeTextarea = (textarea: HTMLTextAreaElement) => {
+    textarea.style.height = 'auto'
+    textarea.style.height = textarea.scrollHeight + 'px'
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit(e as unknown as FormEvent)
+    }
+  }
+
   return (
     <div className='border-t border-gray-900 bg-black p-4'>
       <form
-        className='flex items-center gap-3 rounded-lg bg-gray-600 p-2 pr-4'
+        className='flex items-center gap-3 rounded-lg bg-gray-600 p-2'
         onSubmit={handleSubmit}
       >
         <input type='hidden' name='conversationId' value={chatId} />
         <input type='hidden' name='senderId' value={currentUserID} />
-        <input
-          className='input flex-1 outline-none border-none bg-transparent px-4 py-2 text-sm focus:ring-0 '
+        <textarea
+          className='input flex-1 outline-none border-none bg-transparent px-4 py-2 text-sm focus:ring-0 resize-none overflow-hidden'
           placeholder='Type your message...'
           autoComplete='off'
           name='content'
+          onKeyDown={handleKeyPress}
           value={formData.content}
-          onChange={(e) =>
-            setFormData({ ...formData, content: e.target.value })
-          }
+          onChange={handleInputChange}
+          rows={1}
         />
       </form>
     </div>
