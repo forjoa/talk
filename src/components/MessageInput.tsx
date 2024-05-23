@@ -20,12 +20,12 @@ function MessageInput({
     event.preventDefault()
 
     if (formData.conversationId && formData.senderId && formData.content) {
-      sendMessage(formData.content)
-      await insertMessage(formData)
       setFormData({
         ...formData,
         content: '',
       })
+      sendMessage(formData.content)
+      await insertMessage(formData)
     }
   }
 
