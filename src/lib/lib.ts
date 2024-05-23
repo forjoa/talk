@@ -59,7 +59,8 @@ export async function register(formData: FormData) {
     args: [username],
   })
 
-  if (rows.length > 0) return { success: false, message: 'Username already exists' }
+  if (rows.length > 0)
+    return { success: false, message: 'Username already exists' }
 
   await db.execute({
     sql: 'INSERT INTO users (username, fullname, password) VALUES (?,?,?)',
@@ -92,4 +93,26 @@ export async function insertMessage(formData: any) {
     sql: 'INSERT INTO messages (conversation_id, sender_id, content) VALUES (?,?,?)',
     args: [conversationId, senderId, content],
   })
+}
+
+export async function updateUser(formData: FormData) {
+  const username = formData.get('username') as string
+  const fullname = formData.get('fullname') as string
+  const userId = formData.get('user_id') as string
+
+  const { rows } = await db.execute({
+    sql: 'SELECT * FROM users WHERE username = ?',
+    args: [username],
+  })
+
+  if (rows.length > 0) return { success: false, message: 'Username already exists' }
+
+  const { rowsAffected } = await db.execute({
+    sql: 'UPDATE users SET username = ?, fullname = ? WHERE user_id = ?',
+    args: [username, fullname, userId],
+  })
+
+  if (rowsAffected === 0) return { success: false, message: 'Failed to update user' }
+  
+  return { success: true, message: 'User updated successfully' }
 }
