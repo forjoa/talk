@@ -23,7 +23,7 @@ export default async function Chat() {
         </p>
       </div>
       <div className='bg-black md:h-0 h-full md:w-72 w-full'>
-        <div className='flex h-[100px] items-center justify-between border-b border-white px-4'>
+        <div className='flex h-[100px] items-center justify-between border-b border-gray-900 px-4'>
           <div className='flex flex-col py-4 gap-2 w-full'>
             <div className='flex w-full justify-between items-center'>
               <div>Welcome, {user.username}</div>
@@ -48,7 +48,7 @@ export default async function Chat() {
               <Link
                 key={index}
                 href={`/chat/${chat.conversation_id}`}
-                className='flex p-4 m-2 mr-4 rounded hover:underline border-2 border-white shadow'
+                className='flex p-4 m-2 mr-4 rounded hover:underline border border-gray-900'
               >
                 {chat.other_username as string}
               </Link>

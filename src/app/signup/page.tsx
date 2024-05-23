@@ -11,9 +11,9 @@ export default async function Register() {
   }
   return (
     <main className='flex h-screen w-screen items-center justify-between'>
-      <div className='rounded border-2 p-8 shadow-[5px_5px_0px_0px_rgba(255,255,255)] w-4/5 block m-auto'>
+      <div className='rounded border border-gray-900 p-8 w-4/5 block m-auto'>
         <h2 className='text-2xl'>Register</h2>
-        <p className='text-gray-300 my-4'>
+        <p className='text-gray-400 my-4'>
           Thank you so much since you trust us!
         </p>
         <form className='h-auto' action={submitRegister}>
@@ -26,7 +26,7 @@ export default async function Register() {
             id='fullname'
             placeholder='Fullname'
             required
-            className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-transparent p-4 my-2'
+            className='w-full rounded border border-gray-900 bg-transparent p-4 my-2 outline-2 outline-white'
           />
           <label htmlFor='username' className='mt-8'>
             Username
@@ -37,7 +37,7 @@ export default async function Register() {
             id='username'
             placeholder='Username'
             required
-            className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-transparent p-4 my-2'
+            className='w-full rounded border border-gray-900 bg-transparent p-4 my-2 outline-2 outline-white'
           />
           <label htmlFor='password' className='mt-8'>
             Password
@@ -47,12 +47,12 @@ export default async function Register() {
             name='password'
             id='password'
             required
-            className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-transparent p-4 my-2'
+            className='w-full rounded border border-gray-900 bg-transparent p-4 my-2 outline-2 outline-white'
           />
           <input
             type='submit'
             value='Sign up'
-            className='w-full rounded border-2 shadow-[5px_5px_0px_0px_rgba(255,255,255)] bg-white text-black p-4 my-2 cursor-pointer'
+            className='w-full rounded border bg-white text-black p-4 my-2 cursor-pointer'
           />
         </form>
         <div className='w-full flex flex-col items-end mt-4'>

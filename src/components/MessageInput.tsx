@@ -32,15 +32,15 @@ function MessageInput({
   }
 
   return (
-    <div className='border-t-2 border-white bg-black p-4'>
+    <div className='border-t border-gray-900 bg-black p-4'>
       <form
-        className='flex items-center gap-3 rounded-lg border-2 bg-white bg-opacity-30 p-2 pr-4 shadow'
+        className='flex items-center gap-3 rounded-lg bg-gray-600 p-2 pr-4'
         onSubmit={handleSubmit}
       >
         <input type='hidden' name='conversationId' value={chatId} />
         <input type='hidden' name='senderId' value={currentUserID} />
         <input
-          className='input flex-1 outline-none border-none bg-transparent px-4 py-2 text-sm focus:ring-0 dark:text-gray-200'
+          className='input flex-1 outline-none border-none bg-transparent px-4 py-2 text-sm focus:ring-0 '
           placeholder='Type your message...'
           autoComplete='off'
           name='content'
@@ -49,9 +49,6 @@ function MessageInput({
             setFormData({ ...formData, content: e.target.value })
           }
         />
-        <button type='submit'>
-          <Image src={sendIcon} alt='Send icon' />
-        </button>
       </form>
     </div>
   )

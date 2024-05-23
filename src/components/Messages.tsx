@@ -30,10 +30,10 @@ function Messages({
           }`}
         >
           <div
-            className={`p-3 rounded-lg w-auto max-w-[80%] border-2 shadow ${
+            className={`p-3 rounded-lg w-auto max-w-[80%] ${
               message.sender_id === currentUserID
-                ? 'bg-blue-500 border-white text-white'
-                : 'bg-white border-black text-black'
+                ? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white'
+                : 'bg-gradient-to-r from-zinc-300 to-zinc-50 text-black'
             }`}
           >
             <div className='text-sm'>{message.content}</div>

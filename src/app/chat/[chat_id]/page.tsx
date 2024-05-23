@@ -56,7 +56,7 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
   return (
     <>
       {currentUserID && messages && otherFullname ? (
-        <div className='flex h-full flex-col md:mx-4 md:border-2 md:rounded'>
+        <div className='flex h-full flex-col md:mx-4 md:border md:border-gray-900 md:rounded'>
           <Header otherFullname={otherFullname} />
           <Messages messages={messages} currentUserID={currentUserID}/>
           <MessageInput

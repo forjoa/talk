@@ -9,7 +9,7 @@ function Avatar({ fullname } : { fullname : string }) {
 
   return (
     <div className='avatar'>
-      <div className='bg-gray-600 h-10 w-10 rounded-full grid place-items-center border shadow'>
+      <div className='bg-gray-600 h-10 w-10 rounded-full grid place-items-center'>
         {initials}
       </div>
     </div>

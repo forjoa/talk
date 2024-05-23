@@ -51,7 +51,7 @@ export default function SearchUser({
 
   return (
     <>
-      <div className='flex items-center border-2 rounded border-white shadow py-2 px-4'>
+      <div className='flex items-center border rounded border-gray-900 py-2 px-4'>
         <input
           type='text'
           name='username'
@@ -67,11 +67,11 @@ export default function SearchUser({
         </button>
       </div>
       {filteredUsers.length !== 0 && searchTerm && (
-        <div className='absolute top-[115px] left-0 md:left-4 bg-black border-2 z-10 w-full md:w-[282px] shadow rounded-b-xl'>
+        <div className='absolute top-[115px] left-0 md:left-4 bg-black border border-gray-900 z-10 w-full md:w-[287px] rounded-b-xl'>
           {filteredUsers.map((user, index) => (
             <div
               key={index}
-              className='p-4 border-t-2 border-white'
+              className='p-4 border-t border-gray-900'
               onClick={() => createConversation(user.user_id)}
             >
               <p className='hover:underline cursor-pointer'>{user.username}</p>

@@ -22,8 +22,8 @@ export default async function ChatLayout({
 
   return (
     <div className='flex h-screen w-full flex-col md:flex-row overflow-hidden'>
-      <div className='border-2 border-white bg-black h-0 md:w-72 md:ml-4 md:my-4 md:h-[calc(100vh-2rem)] rounded w-full'>
-        <div className='hidden md:flex h-[100px] items-center justify-between border-b-2 border-white px-4'>
+      <div className='border border-gray-900 bg-black h-0 md:w-72 md:ml-4 md:my-4 md:h-[calc(100vh-2rem)] rounded w-full'>
+        <div className='hidden md:flex h-[100px] items-center justify-between border-b border-gray-900 px-4'>
           <div className='flex flex-col py-4 gap-2 w-full'>
             <div className='flex w-full justify-between items-center'>
               <div>Welcome, {user.username}</div>
@@ -40,7 +40,7 @@ export default async function ChatLayout({
             <SearchUser currentUserID={user.user_id}/>
           </div>
         </div>
-        <div className='h-[calc(100%-100px)] max-h-[calc(100%-100px)] overflow-y-scroll'>
+        <div className='h-[calc(100%-100px)] max-h-[calc(100%-100px)] overflow-y-auto'>
           {chats.length === 0 ? (
             <p className='p-4'>You don&apos;t have any chat yet</p>
           ) : (
@@ -48,7 +48,7 @@ export default async function ChatLayout({
               <Link
                 key={index}
                 href={`/chat/${chat.conversation_id}`}
-                className='flex p-4 m-2 mr-4 rounded hover:underline border-2 border-white shadow'
+                className='flex p-4 m-2 rounded hover:underline border border-gray-900'
               >
                 {chat.other_username as string}
               </Link>
@@ -56,7 +56,7 @@ export default async function ChatLayout({
           )}
         </div>
       </div>
-      <div className='flex-1 h-[calc(100vh-2rem)] my-4'>{children}</div>
+      <div className='flex-1 h-[calc(100vh-2rem)] md:my-4'>{children}</div>
     </div>
   )
 }
