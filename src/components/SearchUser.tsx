@@ -58,6 +58,7 @@ export default function SearchUser({
           id='username'
           placeholder='Search a user'
           className='bg-transparent outline-none flex-grow'
+          autoComplete='off'
           value={searchTerm}
           onChange={handleSearch}
         />
