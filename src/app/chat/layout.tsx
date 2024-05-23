@@ -37,7 +37,7 @@ export default async function ChatLayout({
                 </button>
               </form>
             </div>
-            <SearchUser />
+            <SearchUser currentUserID={user.user_id}/>
           </div>
         </div>
         <div className='h-[calc(100%-100px)] max-h-[calc(100%-100px)] overflow-y-scroll'>
