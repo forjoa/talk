@@ -31,7 +31,7 @@ export default function Register() {
     formData.append('password', password)
     const response = await register(formData)
     if (response.success) {
-      router.push('/chat')
+      router.push('/login')
     } else {
       toast.error(response.message)
     }
