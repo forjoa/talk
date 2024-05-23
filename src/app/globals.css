@@ -42,9 +42,13 @@
 
 html, body {
   touch-action: manipulation;
+  -webkit-user-select: none; /* Disable text selection */
+  -ms-user-select: none; /* Disable text selection */
+  user-select: none; /* Disable text selection */
 }
 
 body {
+  touch-action: pan-x pan-y; /* Disable pinch-zoom */
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
