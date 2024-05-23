@@ -1,5 +1,7 @@
 import React, { FormEvent, useState } from 'react'
 import { insertMessage } from '@/lib/lib'
+import Image from 'next/image'
+import sendIcon from '@/assets/send.svg'
 
 function MessageInput({
   chatId,
@@ -64,6 +66,12 @@ function MessageInput({
           onChange={handleInputChange}
           rows={1}
         />
+        <button
+          type='submit'
+          className='h-full py-2 px-4 bg-white text-black rounded'
+        >
+          <Image src={sendIcon} alt='sendIcon'/>
+        </button>
       </form>
     </div>
   )
