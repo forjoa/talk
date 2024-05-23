@@ -83,11 +83,26 @@ export async function getAllUsers(user_id: number) {
     const { rows } = await db.execute({
       sql: 'SELECT * FROM users WHERE user_id != ?',
       args: [user_id],
-    });
-    return rows;
+    })
+    return rows
   } catch (error) {
-    console.error('Error fetching users:', error);
-    throw error;
+    console.error('Error fetching users:', error)
+    throw error
   }
 }
 
+export async function knowConversationExists(user1: number, user2: number): Promise<{ exists: boolean, conversationId: number }> {
+  const { rows } = await db.execute({
+    sql: 'SELECT conversation_id FROM conversations WHERE user1_id = ? AND user2_id = ? OR user2_id = ? AND user1_id = ?',
+    args: [user1, user2, user1, user2],
+  })
+
+  if (rows.length > 0) return { exists: true, conversationId: rows[0].conversation_id as number}
+
+  const { lastInsertRowid } = await db.execute({
+    sql: 'INSERT INTO conversations (user1_id, user2_id) VALUES (?,?)',
+    args: [user1, user2],
+  })
+
+  return { exists: true, conversationId: lastInsertRowid as unknown as number }
+}
