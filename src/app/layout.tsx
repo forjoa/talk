@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -7,12 +7,13 @@ const jetbrains = JetBrains_Mono({ weight: ['400', '800'], subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Talk',
   description: 'Your Next.js favorite chat aplication',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
