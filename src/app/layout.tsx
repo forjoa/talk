@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const poppins = Poppins({ weight: ['400', '800'], subsets: ['latin'] })
+const jetbrains = JetBrains_Mono({ weight: ['400', '800'], subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Talk',
@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
-        <link rel="icon" href='/chat.png' sizes='any' />
+        <link rel='icon' href='/chat.png' sizes='any' />
       </head>
-      <body className={poppins.className}>{children}</body>
+      <body className={jetbrains.className}>{children}</body>
     </html>
   )
 }
