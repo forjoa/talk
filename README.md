@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Minimalist chat aplicaction. Based on getting users by username.
 
-<img src='./public/Captura de pantalla 2024-05-25 105245.png' style='width: 100%'/>
+<img src='./public/chat-image.png' style='width: 100%'/>
 
 ## Database Schema
 
@@ -43,3 +43,5 @@ The `messages` table stores information about the messages exchanged in conversa
 | `sender_id`       | INTEGER   | FOREIGN KEY REFERENCES users(user_id)                 |
 | `content`         | TEXT      |                                                       |
 | `timestamp`       | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP                             |
+
+<img src='./public/db-graph.png'/>
