@@ -6,6 +6,18 @@ Minimalist chat aplicaction. Based on getting users by username.
 
 <img src='./public/chat-image.png' style='width: 100%'/>
 
+## Technologies & Dependencies
+
+| Technology                                                                                                                                            | Description                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs)                                                            | React framework             |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript)                                                     | Programming language        |
+| ![Turso Database](<https://img.shields.io/badge/Turso%20Database-000000?style=for-the-badge&logo=data:image/png;base64,...(base64_encoded_image)...>) | Production database         |
+| ![Jose](https://img.shields.io/badge/jose-000000?style=for-the-badge&logo=jwt)                                                                        | JWT helper                  |
+| ![bcrypt](https://img.shields.io/badge/bcrypt-338837?style=for-the-badge&logo=bcrypt)                                                                 | Hashing & compare passwords |
+| ![sonner](https://img.shields.io/badge/sonner-FF7F50?style=for-the-badge&logo=react)                                                                  | Toaster notifications       |
+| ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socketdotio)                                                      | Websocket                   |
+
 ## Database Schema
 
 This project utilizes a SQLite database with three main tables: `users`, `conversations`, and `messages`. Below is an explanation of each table, its structure, and visual diagrams.
