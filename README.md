@@ -2,7 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Talk
 
-Minimalist chat aplicaction. Based of getting users by username.
+Minimalist chat aplicaction. Based on getting users by username.
+
+<img src='./public/Captura de pantalla 2024-05-25 105245.png' style='width: 100%'/>
 
 ## Database Schema
 
