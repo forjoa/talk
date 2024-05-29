@@ -57,3 +57,14 @@ The `messages` table stores information about the messages exchanged in conversa
 | `timestamp`       | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP                             |
 
 <img src='./public/db-graph.png'/>
+
+## How server.js is working?
+
+Create an `http` server with `next()` just like `express()` and then it creates a Socket server
+
+```javascript
+const app = next({ dev, hostname, port })
+const handler = app.getRequestHandler()
+const httpServer = createServer(handler)
+const io = new Server(httpServer)
+```
