@@ -89,3 +89,49 @@ io.on('connection', (socket) => { // this works when a user activates the socket
   })
 })
 ```
+
+## How client side works?
+
+First we have to create a socket instance just like this
+
+```javascript
+import io from 'socket.io-client'
+
+  const [socket, setSocket] = useState<any>(null)
+
+useEffect((): any => {
+  const newSocket = io()
+  setSocket(newSocket)
+  return () => newSocket.close()
+}, [])
+```
+
+Then we have to indicates to the socket that when a user enters to a conversation, also they need to enter to a socket room
+
+```javascript
+useEffect(() => {
+  if (socket) {
+    socket.emit('joinRoom', chatId.toString()) // join to the room with the conversation_id
+
+    socket.on('chat message', (message: any) => {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { content: message.message, sender_id: message.currentUserID },
+      ])
+    })
+  }
+}, [socket, chatId]) // this will change as long as you change between conversations
+```
+
+And, of course, we have our sendMessage function
+
+```javascript
+const sendMessage = (message: string) => {
+    if (socket) {
+      socket.emit('chat message', {
+        room: chatId.toString(),
+        msg: { message, currentUserID },
+      })
+    }
+}
+```
