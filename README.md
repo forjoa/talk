@@ -68,3 +68,24 @@ const handler = app.getRequestHandler()
 const httpServer = createServer(handler)
 const io = new Server(httpServer)
 ```
+
+Then, this is the main logic of the server side
+
+```javascript
+io.on('connection', (socket) => { // this works when a user activates the socket in the client side 
+  console.log('a user is connected')
+
+  socket.on('joinRoom', (room) => { // this works when a user open a conversation (room = conversation_id)
+    socket.join(room)
+    console.log(`User joined room ${room}`)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+
+  socket.on('chat message', ({ room, msg }) => { // this works when the client side send a message
+    io.to(room).emit('chat message', msg)
+  })
+})
+```
