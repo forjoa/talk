@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { getConversation, getOtherUser } from '@/lib/getters'
+import { getConversation, getOtherUser, knowIfSaving } from '@/lib/getters'
 import { getSession } from '@/lib/lib'
 import Header from '@/components/ChatHeader'
 import Messages from '@/components/Messages'
@@ -15,6 +15,7 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
   const [messages, setMessages] = useState<any[]>([])
   const [otherFullname, setOtherFullname] = useState<any>()
   const [socket, setSocket] = useState<any>(null)
+  const [saving, setSaving] = useState<boolean>()
 
   useEffect((): any => {
     const newSocket = io()
@@ -28,6 +29,7 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
   useEffect(() => {
     if (chatId) {
       getConversation(chatId).then((response) => setMessages(response))
+      knowIfSaving(chatId).then((response) => setSaving(!!response.save))
     }
   }, [chatId])
 
@@ -65,7 +67,7 @@ export default function Chat({ params }: { params: { chat_id: number } }) {
     <>
       {currentUserID && messages && otherFullname ? (
         <div className='flex h-full flex-col md:mx-4 md:border md:border-gray-900 md:rounded'>
-          <Header otherFullname={otherFullname} />
+          <Header otherFullname={otherFullname} saving={saving} chatId={chatId}/>
           <Messages messages={messages} currentUserID={currentUserID} />
           <MessageInput
             chatId={chatId}
