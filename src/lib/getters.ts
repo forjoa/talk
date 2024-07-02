@@ -44,6 +44,15 @@ export async function getConversation(conversation_id: number) {
   return rows
 }
 
+export async function knowIfSaving(conversation_id: number) {
+  const { rows } = await db.execute({
+    sql: `SELECT save FROM conversations where conversation_id = ?;`,
+    args: [conversation_id],
+  })
+
+  return rows[0]
+}
+
 export async function getOtherUser(
   conversation_id: number,
   current_user_id: number
@@ -91,13 +100,17 @@ export async function getAllUsers(user_id: number) {
   }
 }
 
-export async function knowConversationExists(user1: number, user2: number): Promise<{ exists: boolean, conversationId: number }> {
+export async function knowConversationExists(
+  user1: number,
+  user2: number
+): Promise<{ exists: boolean; conversationId: number }> {
   const { rows } = await db.execute({
     sql: 'SELECT conversation_id FROM conversations WHERE user1_id = ? AND user2_id = ? OR user2_id = ? AND user1_id = ?',
     args: [user1, user2, user1, user2],
   })
 
-  if (rows.length > 0) return { exists: true, conversationId: rows[0].conversation_id as number}
+  if (rows.length > 0)
+    return { exists: true, conversationId: rows[0].conversation_id as number }
 
   const { lastInsertRowid } = await db.execute({
     sql: 'INSERT INTO conversations (user1_id, user2_id) VALUES (?,?)',
