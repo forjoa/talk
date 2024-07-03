@@ -26,15 +26,28 @@ function Header({ otherFullname, saving, chatId }: HeaderProps) {
         <Avatar fullname={otherFullname} />
         <div className='font-medium'>{otherFullname}</div>
       </div>
-      <div className='relative group'>
-        <button onClick={toggleDiscreetMode} className='relative z-10'>
-          {isDiscreetMode ? (
-            <Image src={eyeOff} alt='eye off' />
-          ) : (
-            <Image src={eye} alt='eye' />
-          )}
-        </button>
-        <div className='absolute bottom-full left-1/2 transform -translate-x-[100px] md:translate-y-[100px] translate-y-[140px] mb-2 hidden group-hover:block bg-gray-800 text-white text-sm p-2 rounded'>
+      <div className='relative group grid place-items-center'>
+        <label className='relative inline-flex items-center cursor-pointer'>
+          <input
+            type='checkbox'
+            className='sr-only peer'
+            checked={isDiscreetMode}
+            onChange={toggleDiscreetMode}
+          />
+          <div className="group peer ring-0 bg-gray-50 border-2 border-gray-900 rounded-full outline-none duration-700 after:duration-200 w-24 h-10 shadow-md peer-checked:bg-gradient-to-r peer-focus:outline-none after:content-[''] after:rounded-full after:absolute after:bg-gray-900 after:outline-none after:h-8 after:w-10 after:top-1 after:left-1 peer-checked:after:translate-x-12 peer-hover:after:scale-95">
+            <Image
+              src={eye}
+              alt='eye'
+              className='absolute top-1 left-12 w-10 h-8'
+            />
+            <Image
+              src={eyeOff}
+              alt='eye off'
+              className='absolute top-1 left-1 w-10 h-8'
+            />
+          </div>
+        </label>
+        <div className='absolute bottom-full left-1/2 transform -translate-x-[150px] md:translate-y-[100px] translate-y-[140px] mb-2 hidden group-hover:block bg-gray-800 text-white text-sm p-2 rounded'>
           {isDiscreetMode
             ? 'Discreet mode activated. Messages will not be stored.'
             : 'Activate discreet mode to stop storing messages.'}
